@@ -1,23 +1,23 @@
 <?php
 require_once 'vendor/autoload.php';
 
-use CFBData\Scoreboard;
-use CFBData\Game;
-use CFBData\Rankings;
-use CFBData\Standings;
+use CFBData\ESPNScoreboard;
+use CFBData\ESPNGame;
+use CFBData\ESPNRankings;
+use CFBData\ESPNStandings;
 
-$scoreboard = Scoreboard::get(2016,2);
+$scoreboard = ESPNScoreboard::get(2016,1,80);
+print_r($scoreboard);
 
-//print_r($scoreboard);
-
-$game = Game::get(400763535);
+//$game = ESPNGame::get(233050096);
+//$game = ESPNGame::get(400926942);
 
 //print_r($game);
 
-$rankings = Rankings::get(2016,2);
+//$rankings = ESPNRankings::get(2016,2);
 
 //print_r($rankings);
 
-$standings = Standings::get(2016);
+//$standings = ESPNStandings::get(2016);
 
-print_r($standings);
+//print_r($standings);

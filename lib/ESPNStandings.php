@@ -1,7 +1,7 @@
 <?php
 namespace CFBData;
 
-class Standings
+class ESPNStandings
 {
     const BASE_URL = 'http://cdn.espn.com/core/college-football/standings/_/season/%s/view/%s';
 

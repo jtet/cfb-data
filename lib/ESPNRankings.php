@@ -1,7 +1,7 @@
 <?php
 namespace CFBData;
 
-class Rankings
+class ESPNRankings
 {
     const BASE_URL = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/rankings';
 
