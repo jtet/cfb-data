@@ -1,0 +1,12 @@
+{
+  "name": "jtet/cfb-data",
+  "description": "Php port of BlueSCar/cfb-data",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {"CFBData\\": "lib/"}
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^6.2"
+  }
+}
