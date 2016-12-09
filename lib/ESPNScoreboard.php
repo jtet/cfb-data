@@ -1,11 +1,14 @@
 <?php
 namespace CFBData;
 
+use CFBData\Object\Game;
+use CFBData\Object\Venue;
+
 class ESPNScoreboard
 {
     const BASE_URL = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard';
 
-    static function get($year, $week, $groups = null, $season_type = null)
+    static function get($year, $week, $groups = null, $season_type = null, $shallow = false)
     {
             $query = [
                 'year'=>$year,
@@ -32,15 +35,25 @@ class ESPNScoreboard
                 $games = [];
                 foreach($scoreBoard->events as $event)
                 {
-                    $venue = new \CFBData\Object\Venue();
-                    $venue->setName($event->competitions[0]->venue->fullName);
-                    $venue->setCity($event->competitions[0]->venue->address->city);
-                    $venue->setState($event->competitions[0]->venue->address->state);
-                    $venue->setIndoor($event->competitions[0]->venue->indoor);
-                    $venue->setId($event->competitions[0]->venue->id);
-
+                    if(!isset($event->competitions[0]->venue))
+                    {
+                        $venue = new Venue();
+                    }
+                    else {
+                        $venue = new \CFBData\Object\Venue();
+                        $venue->setName($event->competitions[0]->venue->fullName);
+                        $venue->setCity($event->competitions[0]->venue->address->city);
+                        $venue->setState($event->competitions[0]->venue->address->state);
+                        $venue->setIndoor($event->competitions[0]->venue->indoor);
+                        $venue->setId($event->competitions[0]->venue->id);
+                    }
                     $attendance = $event->competitions[0]->attendance;
-                    $game = \CFBData\ESPNGame::get($event->competitions[0]->id);
+                    if(!$shallow) {
+                        $game = \CFBData\ESPNGame::get($event->competitions[0]->id);
+                    }
+                    else{
+                        $game = new Game();
+                    }
                     $game->setAttendance($attendance);
                     $game->setVenue($venue);
 

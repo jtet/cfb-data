@@ -46,7 +46,7 @@ class Game
     /**
      * @return mixed
      */
-    public function getVenue()
+    public function getVenue() : Venue
     {
         return $this->venue;
     }
