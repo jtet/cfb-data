@@ -25,6 +25,8 @@ class ESPNScoreboard
                 $query['season_type'] = $season_type;
             }
 
+            $query['limit'] = 300;
+
             $uri = sprintf("%s?%s", self::BASE_URL, http_build_query($query));
             $client = new \GuzzleHttp\Client();
             $res = $client->request('GET', $uri);
