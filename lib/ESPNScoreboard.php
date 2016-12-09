@@ -45,7 +45,10 @@ class ESPNScoreboard
                         $venue = new \CFBData\Object\Venue();
                         $venue->setName($event->competitions[0]->venue->fullName);
                         $venue->setCity($event->competitions[0]->venue->address->city);
-                        $venue->setState($event->competitions[0]->venue->address->state);
+
+                        if(isset($event->competitions[0]->venue->address->state)) {
+                            $venue->setState($event->competitions[0]->venue->address->state);
+                        }
                         $venue->setIndoor($event->competitions[0]->venue->indoor);
                         $venue->setId($event->competitions[0]->venue->id);
                     }
