@@ -6,34 +6,18 @@ use CFBData\Object\Venue;
 
 class ESPNScoreboard
 {
-    const BASE_URL = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/scoreboard';
+    const BASE_URL = 'http://cdn.espn.com/core/college-football/scoreboard/_/group/%s/year/%s/seasontype/%s/week/%s?xhr=1&render=true&device=desktop';
 
-    static function get($year, $week, $groups = null, $season_type = null, $shallow = false)
+    static function get($year, $week, $groups = 80, $season_type = 2, $shallow = false)
     {
-            $query = [
-                'year'=>$year,
-                'week'=>$week
-            ];
-
-            if(!is_null($groups))
-            {
-                $query['groups'] = $groups;
-            }
-
-            if(!is_null($season_type))
-            {
-                $query['season_type'] = $season_type;
-            }
-
-            $query['limit'] = 300;
-
-            $uri = sprintf("%s?%s", self::BASE_URL, http_build_query($query));
+            $uri = sprintf(self::BASE_URL, $groups, $year, $season_type, $week);
             $client = new \GuzzleHttp\Client();
             $res = $client->request('GET', $uri);
 
             if($res->getStatusCode() == 200)
             {
                 $scoreBoard = json_decode($res->getBody());
+                $scoreBoard = $scoreBoard->content->sbData;
                 $games = [];
                 foreach($scoreBoard->events as $event)
                 {
