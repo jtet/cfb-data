@@ -3,6 +3,8 @@ namespace CFBData;
 
 use CFBData\Object\Game;
 use CFBData\Object\Venue;
+use CFBData\Object\Broadcast;
+use CFBData\Object\Team;
 
 class ESPNScoreboard
 {
@@ -42,6 +44,51 @@ class ESPNScoreboard
                     }
                     else{
                         $game = new Game();
+                        $game->setDate($event->competitions[0]->date);
+                        $game->setNeutralSite($event->competitions[0]->neutralSite);
+                        $game->setId($event->competitions[0]->id);
+                        $game->setConferenceCompetition($event->competitions[0]->conferenceCompetition);
+
+                        foreach($event->competitions[0]->geoBroadcasts as $broadcast)
+                        {
+                            $broadcastObj = new Broadcast();
+                            $broadcastObj->setLanguage($broadcast->lang);
+                            $broadcastObj->setMarket($broadcast->market->type);
+                            $broadcastObj->setNetwork($broadcast->media->shortName);
+                            $broadcastObj->setMediatype($broadcast->type->shortName);
+                            $broadcastObj->setRegion($broadcast->region);
+                            $game->addBroadcast($broadcastObj);
+                        }
+
+                        foreach($event->competitions[0]->competitors as $competitor)
+                        {
+                            $team = new Team();
+                            $team->setAbbreviation($competitor->team->abbreviation);
+                            if(isset($competitor->team->color)) {
+                                $team->setColor($competitor->team->color);
+                            }
+                            $team->setDisplayName($competitor->team->displayName);
+                            $team->setHomeAway($competitor->homeAway);
+
+                            if($competitor->homeAway == 'home')
+                            {
+                                $game->setHomeScore($competitor->score);
+                            }
+                            else{
+                                $game->setAwayScore($competitor->score);
+                            }
+
+                            $team->setId($competitor->id);
+                            if(!isset($rank))
+                            {
+                                $team->setRank(null);
+                            }
+                            else {
+                                $team->setRank($competitor->rank);
+                            }
+
+                            $game->addTeam($team);
+                        }
                     }
                     $game->setAttendance($attendance);
                     $game->setVenue($venue);
