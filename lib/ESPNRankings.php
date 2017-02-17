@@ -3,25 +3,17 @@ namespace CFBData;
 
 class ESPNRankings
 {
-    const BASE_URL = 'http://site.api.espn.com/apis/site/v2/sports/football/college-football/rankings';
+    const BASE_URL = 'http://cdn.espn.com/core/college-football/rankings/_/seasontype/%s/year/%s/week/%s?xhr=1&render=true&device=desktop';
 
-    static function get($year, $week, $season_type = null)
+    static function get($year, $week, $season_type = 2)
     {
-        $query = [
-            'year' => $year,
-            'week' => $week
-        ];
-
-        if (!is_null($season_type)) {
-            $query['season_type'] = $season_type;
-        }
-
-        $uri = sprintf("%s?%s", self::BASE_URL, http_build_query($query));
+        $uri = sprintf(self::BASE_URL, $season_type, $year, $week);
         $client = new \GuzzleHttp\Client();
         $res = $client->request('GET', $uri);
 
         if ($res->getStatusCode() == 200) {
-            return json_decode($res->getBody());
+            $body = json_decode($res->getBody());
+            return $body->content->data->rankings;
         } else {
             return false;
         }
