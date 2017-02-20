@@ -150,8 +150,15 @@ class ESPNBoxScore
     {
         $result = new \stdClass();
         $parts = explode($separator, $stat);
-        $result->success = $parts[0];
-        $result->attempt = $parts[1];
+        if(count($parts) < 2)
+        {
+            $result->success = 0;
+            $result->attempt = 0;
+        }
+        else {
+            $result->success = $parts[0];
+            $result->attempt = $parts[1];
+        }
         return $result;
     }
 
