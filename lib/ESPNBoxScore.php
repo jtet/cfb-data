@@ -378,7 +378,7 @@ class ESPNBoxScore
                     case "SOLO":
                         $bsts->setSoloTackles($v);
                         break;
-                    case "SACK":
+                    case "SACKS":
                         $bsts->setSacks($v);
                         break;
                     case "TFL":
