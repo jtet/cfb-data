@@ -349,5 +349,54 @@ class ESPNBoxScore
                 }
             }
         }
+        if($category == "fumbles")
+        {
+            foreach($values as $k => $v)
+            {
+                switch($k)
+                {
+                    case "FUM":
+                        $bsts->setFumbles($v);
+                        break;
+                    case "REC":
+                        $bsts->setFumblesRecovered($v);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        if($category == "defensive")
+        {
+            foreach($values as $k => $v)
+            {
+                switch($k)
+                {
+                    case "TOT":
+                        $bsts->setTackles($v);
+                        break;
+                    case "SOLO":
+                        $bsts->setSoloTackles($v);
+                        break;
+                    case "SACK":
+                        $bsts->setSacks($v);
+                        break;
+                    case "TFL":
+                        $bsts->setTacklesForLoss($v);
+                        break;
+                    case "PD":
+                        $bsts->setPassesDefended($v);
+                        break;
+                    case "QB HUR":
+                        $bsts->setQuarterbackHurries($v);
+                        break;
+                    case "TD":
+                        $bsts->setDefensiveTouchdowns($v);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 }

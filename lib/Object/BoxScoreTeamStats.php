@@ -107,6 +107,24 @@ class BoxScoreTeamStats
 
     private $puntLong;
 
+    private $fumbles;
+
+    private $fumblesRecovered;
+
+    private $tackles;
+
+    private $soloTackles;
+
+    private $sacks;
+
+    private $tacklesForLoss;
+
+    private $passesDefended;
+
+    private $quarterbackHurries;
+
+    private $defensiveTouchdowns;
+
     /**
      * @return mixed
      */
@@ -937,6 +955,150 @@ class BoxScoreTeamStats
     public function setPuntLong($puntLong)
     {
         $this->puntLong = $puntLong;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFumbles()
+    {
+        return $this->fumbles;
+    }
+
+    /**
+     * @param mixed $fumbles
+     */
+    public function setFumbles($fumbles)
+    {
+        $this->fumbles = $fumbles;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFumblesRecovered()
+    {
+        return $this->fumblesRecovered;
+    }
+
+    /**
+     * @param mixed $fumblesRecovered
+     */
+    public function setFumblesRecovered($fumblesRecovered)
+    {
+        $this->fumblesRecovered = $fumblesRecovered;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTackles()
+    {
+        return $this->tackles;
+    }
+
+    /**
+     * @param mixed $tackles
+     */
+    public function setTackles($tackles)
+    {
+        $this->tackles = $tackles;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoloTackles()
+    {
+        return $this->soloTackles;
+    }
+
+    /**
+     * @param mixed $soloTackles
+     */
+    public function setSoloTackles($soloTackles)
+    {
+        $this->soloTackles = $soloTackles;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSacks()
+    {
+        return $this->sacks;
+    }
+
+    /**
+     * @param mixed $sacks
+     */
+    public function setSacks($sacks)
+    {
+        $this->sacks = $sacks;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTacklesForLoss()
+    {
+        return $this->tacklesForLoss;
+    }
+
+    /**
+     * @param mixed $tacklesForLoss
+     */
+    public function setTacklesForLoss($tacklesForLoss)
+    {
+        $this->tacklesForLoss = $tacklesForLoss;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassesDefended()
+    {
+        return $this->passesDefended;
+    }
+
+    /**
+     * @param mixed $passesDefended
+     */
+    public function setPassesDefended($passesDefended)
+    {
+        $this->passesDefended = $passesDefended;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuarterbackHurries()
+    {
+        return $this->quarterbackHurries;
+    }
+
+    /**
+     * @param mixed $quarterbackHurries
+     */
+    public function setQuarterbackHurries($quarterbackHurries)
+    {
+        $this->quarterbackHurries = $quarterbackHurries;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDefensiveTouchdowns()
+    {
+        return $this->defensiveTouchdowns;
+    }
+
+    /**
+     * @param mixed $defensiveTouchdowns
+     */
+    public function setDefensiveTouchdowns($defensiveTouchdowns)
+    {
+        $this->defensiveTouchdowns = $defensiveTouchdowns;
     }
 
 
