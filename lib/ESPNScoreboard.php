@@ -10,6 +10,27 @@ class ESPNScoreboard
 {
     const BASE_URL = 'http://cdn.espn.com/core/college-football/scoreboard/_/group/%s/year/%s/seasontype/%s/week/%s?xhr=1&render=true&device=desktop';
 
+    static function getWeeks($year)
+    {
+        $uri = sprintf(self::BASE_URL, 80, $year, 1, 2);
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('GET', $uri);
+
+        if($res->getStatusCode() == 200)
+        {
+            $scoreBoard = json_decode($res->getBody());
+            $scoreBoard = $scoreBoard->content->sbData;
+
+            $weeks = [];
+            foreach($scoreBoard->leagues[0]->calendar as $period)
+            {
+                $weeks = array_merge($weeks, $period->entries);
+            }
+
+            return $weeks;
+        }
+    }
+
     static function get($year, $week, $groups = 80, $season_type = 2, $shallow = false)
     {
             $uri = sprintf(self::BASE_URL, $groups, $year, $season_type, $week);
